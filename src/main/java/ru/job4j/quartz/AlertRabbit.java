@@ -15,10 +15,11 @@ public class AlertRabbit {
     public static void main(String[] args) {
 
         try {
+            Properties properties = getConfig();
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             scheduler.start();
             JobDetail job = newJob(Rabbit.class).build();
-            int interval = Integer.valueOf((String) getConfig().get("rabbit.interval"));
+            int interval = Integer.parseInt(properties.getProperty("rabbit.interval"));
             SimpleScheduleBuilder times = simpleSchedule()
                     .withIntervalInSeconds(interval)
                     .repeatForever();
@@ -37,7 +38,7 @@ public class AlertRabbit {
         try (InputStream in = AlertRabbit.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
             config.load(in);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException();
         }
         return config;
     }

@@ -49,7 +49,7 @@ public class AlertRabbit {
 
     private static Properties getConfig() {
         Properties config = new Properties();
-        try (InputStream in = AlertRabbit.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
+        try (InputStream in = AlertRabbit.class.getClassLoader().getResourceAsStream("app.properties")) {
             config.load(in);
         } catch (IOException e) {
             throw new IllegalArgumentException();

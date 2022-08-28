@@ -89,7 +89,7 @@ public class PsqlStore implements Store, AutoCloseable {
     public static void main(String[] args) {
         Properties config = new Properties();
         try (InputStream in = PsqlStore.class.getClassLoader().
-                getResourceAsStream("rabbit.properties")) {
+                getResourceAsStream("app.properties")) {
             config.load(in);
             Class.forName(config.getProperty("jdbc.driver"));
         } catch (Exception e) {
